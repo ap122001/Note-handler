@@ -1,4 +1,4 @@
-import { useState } from 'react';
+
 import Post from './Post.jsx';
 import NewPost from './NewPost';
 import classes from "./PostList.module.css";
@@ -7,34 +7,19 @@ import Modal from './Modal.jsx'
 
 
 
-function PostList(){
-    const [enteredBody, setEnteredBody]= useState('');
-    const [enteredAuthor, setEnteredAuthor]= useState('');
-    const [isModalVisible, setIsModalVisible] =useState(true);
-    function changeBodyHandler(event){
-    setEnteredBody(event.target.value);
-    }
+function PostList({isPosting, onStopPosting}){
 
-    function changeAuthorHandler(event){
-    setEnteredAuthor(event.target.value);
-    }
-    function changeModalVisibilityHandler(){
-    
-        // console.log("called");
-        setIsModalVisible(false);
-    }
+
    return <>
         {    
-           isModalVisible ? (<Modal changeModalVisibility={changeModalVisibilityHandler}>
-            <NewPost onBodyChange={changeBodyHandler} onAuthorChange={changeAuthorHandler}></NewPost>
+           isPosting ? (<Modal changeModalVisibility={onStopPosting}>
+            <NewPost  onCancel={onStopPosting}></NewPost>
             </Modal>) : false
         }
 
 
 
     <ul className={classes.posts}>
-     
-     <Post author={enteredAuthor} body={enteredBody}></Post>
      <Post author="abhinav" body="everyone helo"></Post>
    </ul>
    </>

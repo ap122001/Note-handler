@@ -21,6 +21,7 @@ function NewPost(props) {
      body: enteredBody
    }
    console.log(postData);
+   props.onAddPost(postData);
    props.onCancel();
   }
   return (
